@@ -1,8 +1,9 @@
 name: ETE tests
 on:
   push:
-    branches:
-    - main
+    branches: [main]  
+  repository_dispatch:
+      types: [end-to-end-tests]
 
 jobs:
   tests_e2e:
@@ -17,3 +18,4 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run tests
         run: npx playwright test
+
