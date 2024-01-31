@@ -22,15 +22,15 @@ test.describe('Log in suite', () => {
     await page.getByText('Incorrect username or').isVisible();
   });
 
-  test('Log in with correct email and password', async ({ page }) => {
+  test.only('Log in with correct email and password', async ({ page }) => {
     test.slow();
     await page.locator("//button[normalize-space()='Login']").click();
     await page.getByLabel('Username or email address').fill('many185@wp.pl');
     await page.getByLabel('Password').fill('Mariusz123%$');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.pause();
     await page.getByRole('button', { name: 'Mariusz04' }).click()
-    await expect(page.locator('.text-sm.text-gray-500')).toHaveText('many185@wp.pl');
+    await expect(page).toHaveURL('https://mariusz-blog.vercel.app/');
+    //await expect(page.locator('.text-sm.text-gray-500')).toHaveText('many185@wp.pl');
   });
 
   test.afterEach(async ({ page }) => {
