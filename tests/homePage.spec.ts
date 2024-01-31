@@ -22,7 +22,7 @@ test.describe('Log in suite', () => {
     await page.getByText('Incorrect username or').isVisible();
   });
 
-  test.only('Log in with correct email and password', async ({ page }) => {
+  test('Log in with correct email and password', async ({ page }) => {
     test.slow();
     await page.locator("//button[normalize-space()='Login']").click();
     await page.getByLabel('Username or email address').fill('many185@wp.pl');
