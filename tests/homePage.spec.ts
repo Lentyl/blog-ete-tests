@@ -11,7 +11,7 @@ test.describe('Log in suite', () => {
     await page.getByLabel('Username or email address').fill('ABCD');
     await page.getByLabel('Password').fill('Mariusz123%$');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.getByText('Incorrect username or').isDisabled();
+    await page.getByText('Incorrect username or').isVisible();
   });
 
   test('Sign in with an incorrect password', async ({ page }) => {
@@ -19,7 +19,7 @@ test.describe('Log in suite', () => {
     await page.getByLabel('Username or email address').fill('many185@wp.pl');
     await page.getByLabel('Password').fill('KLFD');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.getByText('Incorrect username or').isDisabled();
+    await page.getByText('Incorrect username or').isVisible();
   });
 
   test('Log in with correct email and password', async ({ page }) => {
@@ -27,9 +27,8 @@ test.describe('Log in suite', () => {
     await page.getByLabel('Username or email address').fill('many185@wp.pl');
     await page.getByLabel('Password').fill('Mariusz123%$');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await expect(page.locator('.d-block.color-fg-muted')).toHaveText('wants to access your Mariusz04 account');
-    await page.getByRole('button', { name: 'Authorize*/' }).click();
-    await page.locator("img[alt='Mariusz04']").isDisabled();
+    await page.getByRole('button', { name: 'Mariusz04' }).click()
+    await expect(page.locator('.text-sm.text-gray-500')).toHaveText('many185@wp.pl');
   });
 
   test.afterEach(async ({ page }) => {
