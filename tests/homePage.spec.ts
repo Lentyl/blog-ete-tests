@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Log in suite', () => {
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://mariusz-blog.vercel.app/');
+    // await page.goto('https://mariusz-blog.vercel.app/');
   });
 
   test('Sign in with an incorrect email address', async ({ page }) => {
@@ -30,7 +30,7 @@ test.describe('Log in suite', () => {
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
     //await page.getByRole('button', { name: 'Mariusz04' }).click()
     await expect(page).toHaveURL('https://mariusz-blog.vercel.app/');
-    //await page.getByRole('button', { name: 'Mariusz04' }).click()
+    await page.getByRole('button', { name: 'Mariusz04' }).click()
     await expect(page.locator('.text-sm.text-gray-500')).toHaveText('many185@wp.pl');
   });
 
