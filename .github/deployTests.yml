@@ -16,4 +16,5 @@ jobs:
     - name: Run tests
         run: npx playwright test
         env:
-          BASE_URL: https://mariusz-blog.vercel.app/
+          BASE_URL: ${{ github.event.deployment_status.https://mariusz-blog.vercel.app/}}
+
