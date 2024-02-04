@@ -14,9 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: print details
-        run:
-          echo ${{github.event.client_payload.github.actions}}
       - name: Install dependencies
         run: npm ci
       - name: Install playwright browsers

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Log in suite', () => {
 
   test.beforeEach(async ({ page }) => {
-    // await page.goto('https://mariusz-blog.vercel.app/');
+    await page.goto('/');
   });
 
   test('Sign in with an incorrect email address', async ({ page }) => {
