@@ -4,6 +4,7 @@ on:
   deployment_status:
 jobs:
   run-e2es:
+    echo "{github}"
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
        steps:
