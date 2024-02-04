@@ -16,7 +16,7 @@ jobs:
           node-version: 18
       - name: print details
         run:
-          echo ${{github.event.client_payload.github}}
+          echo ${{github.event.client-payload.github}}
       - name: Install dependencies
         run: npm ci
       - name: Install playwright browsers
