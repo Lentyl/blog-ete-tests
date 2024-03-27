@@ -1,4 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from "../fixtures/pagesFixture"
+import testData from '../data/testData.json'
 
 test.describe('Log in suite', () => {
 
@@ -6,32 +8,24 @@ test.describe('Log in suite', () => {
     await page.goto('/');
   });
 
-  test('Sign in with an incorrect email address', async ({ page }) => {
-    await page.locator("//button[normalize-space()='Login']").click();
-    await page.getByLabel('Username or email address').fill('ABCD');
-    await page.getByLabel('Password').fill('Mariusz123%$');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.getByText('Incorrect username or').isVisible();
+  test('Sign in with an incorrect email address', async ({ homePage }) => {
+    await homePage.login_button.click();
+    await homePage.Login(testData.incorrectEmail, testData.password);
+    await homePage.login_validation_text.isVisible();
   });
 
-  test('Sign in with an incorrect password', async ({ page }) => {
-    await page.locator("//button[normalize-space()='Login']").click();
-    await page.getByLabel('Username or email address').fill('many185@wp.pl');
-    await page.getByLabel('Password').fill('KLFD');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.getByText('Incorrect username or').isVisible();
+  test('Sign in with an incorrect password', async ({ homePage }) => {
+    await homePage.login_button.click();
+    await homePage.Login(testData.email, testData.incorrectPassword);
+    await homePage.login_validation_text.isVisible();
   });
 
-  test('Log in with correct email and password', async ({ page }) => {
+  test('Log in with correct email and password', async ({ homePage }) => {
     test.slow();
-    await page.locator("//button[normalize-space()='Login']").click();
-    await page.getByLabel('Username or email address').fill('many185@wp.pl');
-    await page.getByLabel('Password').fill('Mariusz123%$');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    //await page.getByRole('button', { name: 'Mariusz04' }).click()
-    await expect(page).toHaveURL('https://mariusz-blog.vercel.app/');
-    await page.getByRole('button', { name: 'Mariusz04' }).click()
-    await expect(page.locator('.text-sm.text-gray-500')).toHaveText('many185@wp.pl');
+    await homePage.login_button.click();
+    await homePage.Login(testData.email, testData.password);
+    await homePage.avatar_icon.click();
+    await expect(homePage.avatar_menu_email_text).toHaveText('many185@wp.pl');
   });
 
   test.afterEach(async ({ page }) => {
